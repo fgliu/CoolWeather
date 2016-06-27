@@ -3,7 +3,6 @@ package com.fgliu.coolweather.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -139,13 +138,14 @@ public class ChooseAreaActivity extends Activity{
         String address = null;
         switch (type) {
             case LEVEL_PROVINCE:
-                address = "http://www.weather.com.cn/data/city3jdata/china.html";
+                //address = "http://www.weather.com.cn/data/city3jdata/china.html";
+                address = "http://fj.weather.com.cn/data/city3jdata/china.html";
                 break;
             case LEVEL_CITY:
-                address = "http://www.weather.com.cn/data/city3jdata/provshi/" + code + ".html";
+                address = "http://fj.weather.com.cn/data/city3jdata/provshi/" + code + ".html";
                 break;
             case LEVEL_COUNTRY:
-                address = "http://www.weather.com.cn/data/city3jdata/station/" + code + ".html";
+                address = "http://fj.weather.com.cn/data/city3jdata/station/" + code + ".html";
                 break;
         }
         showProgressDialog();
