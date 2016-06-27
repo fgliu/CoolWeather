@@ -3,6 +3,7 @@ package com.fgliu.coolweather.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -130,7 +131,7 @@ public class ChooseAreaActivity extends Activity{
             titleText.setText(selectedCity.getCityName());
             currentLevel =LEVEL_COUNTRY;
         }else {
-            queryFromServer(selectedCity.getCityCode(),LEVEL_COUNTRY);
+            queryFromServer(selectedProvince.getProvinceCode()+selectedCity.getCityCode(),LEVEL_COUNTRY);
         }
     }
 
@@ -143,9 +144,11 @@ public class ChooseAreaActivity extends Activity{
                 break;
             case LEVEL_CITY:
                 address = "http://fj.weather.com.cn/data/city3jdata/provshi/" + code + ".html";
+                Log.d("fgliu",address);
                 break;
             case LEVEL_COUNTRY:
                 address = "http://fj.weather.com.cn/data/city3jdata/station/" + code + ".html";
+                Log.d("fgliu",address);
                 break;
         }
         showProgressDialog();
