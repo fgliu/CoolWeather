@@ -91,13 +91,27 @@ public class ChooseAreaActivity extends Activity{
                 }else if(currentLevel == LEVEL_COUNTRY){
                     String countryCode = countryList.get(position).getCountryCode();
                     Intent intent = new Intent(ChooseAreaActivity.this,WeatherActivity.class);
-                    intent.putExtra("country_code",selectedProvince.getProvinceCode()+selectedCity.getCityCode()+countryCode);
+                    String cc = cityCode(selectedProvince.getProvinceCode(),selectedCity.getCityCode(),countryCode);
+                    intent.putExtra("country_code",cc);
+                    Log.d("fgliu",selectedProvince.getProvinceCode());
+                    Log.d("fgliu",selectedCity.getCityCode());
+                    Log.d("fgliu",countryCode);
+                    Log.d("fgliu",cc);
+
                     startActivity(intent);
                     finish();
                 }
             }
         });
         queryProvinces();
+    }
+
+    private static String cityCode(String provinceCode,String cityCode,String countryCode){
+        if(provinceCode.matches("1010[1234]")){
+            return provinceCode+countryCode+"00";
+        }else {
+            return provinceCode+cityCode+countryCode;
+        }
     }
 
     private void queryProvinces(){
@@ -161,14 +175,15 @@ public class ChooseAreaActivity extends Activity{
             case LEVEL_PROVINCE:
                 //address = "http://www.weather.com.cn/data/city3jdata/china.html";
                 address = "http://fj.weather.com.cn/data/city3jdata/china.html";
+                Log.d("fgliu",LEVEL_PROVINCE+address);
                 break;
             case LEVEL_CITY:
                 address = "http://fj.weather.com.cn/data/city3jdata/provshi/" + code + ".html";
-                Log.d("fgliu",address);
+                Log.d("fgliu",LEVEL_CITY+address);
                 break;
             case LEVEL_COUNTRY:
                 address = "http://fj.weather.com.cn/data/city3jdata/station/" + code + ".html";
-                Log.d("fgliu",address);
+                Log.d("fgliu",LEVEL_COUNTRY+address);
                 break;
         }
         showProgressDialog();
